@@ -23,12 +23,13 @@
     border-radius: 25px;
     text-align: center;
     box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-    max-width: 420px;
-    animation: pop 1s ease;
+    width: 420px;
+    animation: pop 0.8s ease;
+    position: relative;
   }
 
   @keyframes pop {
-    from { transform: scale(0.8); opacity: 0; }
+    from { transform: scale(0.85); opacity: 0; }
     to { transform: scale(1); opacity: 1; }
   }
 
@@ -36,14 +37,8 @@
     color: #fff;
   }
 
-  h1 {
-    font-size: 2.4rem;
-  }
-
-  h2 {
-    font-size: 1.5rem;
-    margin-bottom: 15px;
-  }
+  h1 { font-size: 2.4rem; }
+  h2 { font-size: 1.5rem; }
 
   p {
     font-size: 1.1rem;
@@ -52,7 +47,7 @@
 
   .buttons {
     position: relative;
-    height: 80px;
+    height: 70px;
   }
 
   button {
@@ -61,18 +56,17 @@
     border-radius: 30px;
     border: none;
     cursor: pointer;
-    transition: 0.3s ease;
+    transition: 0.25s ease;
   }
 
   #yes {
     background: white;
     color: #ff4d6d;
     font-weight: bold;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
   }
 
   #yes:hover {
-    transform: scale(1.15);
+    transform: scale(1.12);
   }
 
   #no {
@@ -98,11 +92,11 @@
 
 <body>
 
-<div class="card">
+<div class="card" id="card">
   <h1>Hey Falak ❤️</h1>
   <p>
-    From the moment you came into my life,<br>
-    everything felt magical…
+    You make everything feel special<br>
+    just by being you…
   </p>
 
   <h2>Will you be my Valentine? 💌</h2>
@@ -113,88 +107,14 @@
   </div>
 </div>
 
-<!-- Romantic song (plays after YES) -->
 <audio id="song" loop>
-  <!-- CHANGE SONG FILE NAME HERE -->
   <source src="romantic.mp3" type="audio/mpeg">
 </audio>
 
 <script>
   const noBtn = document.getElementById("no");
+  const card = document.getElementById("card");
 
-  // NO button escape 😈
-  noBtn.addEventListener("mouseover", moveNo);
-  noBtn.addEventListener("click", moveNo);
-
-  function moveNo() {
-    const x = Math.random() * (window.innerWidth - 150);
-    const y = Math.random() * (window.innerHeight - 80);
-    noBtn.style.position = "fixed";
-    noBtn.style.left = x + "px";
-    noBtn.style.top = y + "px";
-  }
-
-  function yesClicked() {
-    document.body.innerHTML = `
-      <div style="
-        height:100vh;
-        background: radial-gradient(circle at top,#ff9a9e,#fad0c4);
-        display:flex;
-        flex-direction:column;
-        justify-content:center;
-        align-items:center;
-        font-family:'Segoe UI',sans-serif;
-        text-align:center;
-        color:white;
-        padding:20px;">
-        
-        <h1>HAPPY VALENTINE DAY 💖</h1>
-        <h2>My Pretty Falak 🥹❤️</h2>
-
-        <p id="typing" style="font-size:1.4rem; max-width:500px;"></p>
-
-        <p style="margin-top:25px; font-size:1.2rem;">
-          — Yours, Ajmal 💌
-        </p>
-      </div>
-    `;
-
-    playSong();
-    startTyping();
-    for (let i = 0; i < 45; i++) createHeart();
-  }
-
-  function startTyping() {
-    const text = "I LOVE YOU SO MUCH 💕\nYou’re my world, my happiness,\nmy favorite person, always.";
-    const typingEl = document.getElementById("typing");
-    let index = 0;
-
-    function type() {
-      if (index < text.length) {
-        typingEl.innerHTML += text.charAt(index) === "\n" ? "<br>" : text.charAt(index);
-        index++;
-        setTimeout(type, 60);
-      }
-    }
-    type();
-  }
-
-  function playSong() {
-    const song = document.getElementById("song");
-    song.play();
-  }
-
-  function createHeart() {
-    const heart = document.createElement("div");
-    heart.className = "heart";
-    heart.innerHTML = "❤️";
-    heart.style.left = Math.random() * window.innerWidth + "px";
-    heart.style.bottom = "0px";
-    heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
-    document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 5000);
-  }
-</script>
-
-</body>
-</html>
+  // NO button HOVER ONLY (does NOT disappear)
+  noBtn.addEventListener("mouseover", () => {
+    const maxX = card.clientWidth - noBtn.
