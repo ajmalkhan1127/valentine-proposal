@@ -1,120 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Happy Valentine Day My Pretty Falak ❤️</title>
+  <meta charset="UTF-8">
+  <title>Valentine Proposal</title>
 
-<style>
-  body {
-    margin: 0;
-    height: 100vh;
-    background: radial-gradient(circle at top, #ff9a9e, #fad0c4);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Segoe UI', sans-serif;
-    overflow: hidden;
-  }
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #ff4d6d, #ff758f);
+      font-family: 'Segoe UI', sans-serif;
+      color: white;
+      text-align: center;
+      overflow: hidden;
+    }
 
-  .card {
-    background: rgba(255,255,255,0.25);
-    backdrop-filter: blur(14px);
-    padding: 45px;
-    border-radius: 25px;
-    text-align: center;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-    width: 420px;
-    animation: pop 0.8s ease;
-    position: relative;
-  }
+    h1 {
+      font-size: 40px;
+      margin-bottom: 20px;
+    }
 
-  @keyframes pop {
-    from { transform: scale(0.85); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
-  }
+    #message {
+      font-size: 24px;
+      min-height: 70px;
+      margin-bottom: 30px;
+    }
 
-  h1, h2, p {
-    color: #fff;
-  }
+    button {
+      padding: 12px 30px;
+      font-size: 18px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      margin: 10px;
+    }
 
-  h1 { font-size: 2.4rem; }
-  h2 { font-size: 1.5rem; }
+    #yes {
+      background: white;
+      color: #ff4d6d;
+    }
 
-  p {
-    font-size: 1.1rem;
-    margin-bottom: 25px;
-  }
-
-  .buttons {
-    position: relative;
-    height: 70px;
-  }
-
-  button {
-    padding: 12px 32px;
-    font-size: 1.1rem;
-    border-radius: 30px;
-    border: none;
-    cursor: pointer;
-    transition: 0.25s ease;
-  }
-
-  #yes {
-    background: white;
-    color: #ff4d6d;
-    font-weight: bold;
-  }
-
-  #yes:hover {
-    transform: scale(1.12);
-  }
-
-  #no {
-    background: transparent;
-    color: white;
-    border: 2px solid white;
-    position: absolute;
-    right: 0;
-  }
-
-  .heart {
-    position: absolute;
-    font-size: 22px;
-    animation: floatUp 4s linear infinite;
-  }
-
-  @keyframes floatUp {
-    0% { transform: translateY(0); opacity: 1; }
-    100% { transform: translateY(-100vh); opacity: 0; }
-  }
-</style>
+    #no {
+      background: transparent;
+      color: white;
+      border: 2px solid white;
+      position: absolute;
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="card" id="card">
-  <h1>Hey Falak ❤️</h1>
-  <p>
-    You make everything feel special<br>
-    just by being you…
-  </p>
-
-  <h2>Will you be my Valentine? 💌</h2>
-
-  <div class="buttons">
-    <button id="yes" onclick="yesClicked()">Yes 💖</button>
-    <button id="no">No 🙃</button>
+  <div>
+    <h1>Will you be my Valentine? ❤️</h1>
+    <div id="message"></div>
+    <button id="yes">YES ❤️</button>
+    <button id="no">NO</button>
   </div>
-</div>
 
-<audio id="song" loop>
-  <source src="romantic.mp3" type="audio/mpeg">
-</audio>
+  <!-- MUSIC -->
+  <audio id="music">
+    <source src="romantic.mp3" type="audio/mpeg">
+  </audio>
 
-<script>
-  const noBtn = document.getElementById("no");
-  const card = document.getElementById("card");
+  <script>
+    const noBtn = document.getElementById("no");
+    const yesBtn = document.getElementById("yes");
+    const msg = document.getElementById("message");
+    const music = document.getElementById("music");
 
-  // NO button HOVER ONLY (does NOT disappear)
-  noBtn.addEventListener("mouseover", () => {
-    const maxX = card.clientWidth - noBtn.
+    // NO BUTTON HOVER (MOVES, NOT DISAPPEARS)
+    noBtn.addEventListener("mouseover", () => {
+      const x = Math.random() * (window.innerWidth - 100);
+      const y = Math.random() * (window.innerHeight - 50);
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+    });
+
+    // TYPING MESSAGE
+    function typeText(text) {
+      let i = 0;
+      msg.innerHTML = "";
+      const interval = setInterval(() => {
+        msg.innerHTML += text.charAt(i);
+        i++;
+        if (i === text.length) clearInterval(interval);
+      }, 50);
+    }
+
+    // YES CLICK
+    yesBtn.addEventListener("click", () => {
+      typeText("Happy Valentine Day my pretty Falak ❤️ I love you alot ❤️ you are world to me ❤️");
+      music.play();
+    });
+  </script>
+
+</body>
+</html>
