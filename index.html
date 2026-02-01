@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Falak ❤️ Will You Be My Valentine?</title>
+<title>Happy Valentine Day My Pretty Falak ❤️</title>
 
 <style>
   body {
@@ -17,29 +17,35 @@
   }
 
   .card {
-    background: rgba(255,255,255,0.2);
-    backdrop-filter: blur(12px);
+    background: rgba(255,255,255,0.25);
+    backdrop-filter: blur(14px);
     padding: 45px;
     border-radius: 25px;
     text-align: center;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.25);
-    max-width: 400px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+    max-width: 420px;
+    animation: pop 1s ease;
+  }
+
+  @keyframes pop {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+
+  h1, h2, p {
+    color: #fff;
   }
 
   h1 {
-    font-size: 2.5rem;
-    color: #fff;
-    margin-bottom: 10px;
+    font-size: 2.4rem;
   }
 
   h2 {
-    font-size: 1.6rem;
-    color: #fff;
-    margin-bottom: 20px;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
   }
 
   p {
-    color: #fff;
     font-size: 1.1rem;
     margin-bottom: 25px;
   }
@@ -95,9 +101,10 @@
 <div class="card">
   <h1>Hey Falak ❤️</h1>
   <p>
-    From random smiles to silent care,  
-    you’ve become someone really special to me…
+    From the moment you came into my life,<br>
+    everything felt magical…
   </p>
+
   <h2>Will you be my Valentine? 💌</h2>
 
   <div class="buttons">
@@ -106,10 +113,16 @@
   </div>
 </div>
 
+<!-- Romantic song (plays after YES) -->
+<audio id="song" loop>
+  <!-- CHANGE SONG FILE NAME HERE -->
+  <source src="romantic.mp3" type="audio/mpeg">
+</audio>
+
 <script>
   const noBtn = document.getElementById("no");
 
-  // Move NO button on hover
+  // NO button escape 😈
   noBtn.addEventListener("mouseover", moveNo);
   noBtn.addEventListener("click", moveNo);
 
@@ -132,17 +145,43 @@
         align-items:center;
         font-family:'Segoe UI',sans-serif;
         text-align:center;
-        color:white;">
-        <h1>Falak 💕</h1>
-        <h2>You just made my heart skip a beat 🥹</h2>
-        <p style="font-size:1.4rem;">Happy Valentine’s Day ❤️</p>
-        <p>— Yours, Ajmal</p>
+        color:white;
+        padding:20px;">
+        
+        <h1>HAPPY VALENTINE DAY 💖</h1>
+        <h2>My Pretty Falak 🥹❤️</h2>
+
+        <p id="typing" style="font-size:1.4rem; max-width:500px;"></p>
+
+        <p style="margin-top:25px; font-size:1.2rem;">
+          — Yours, Ajmal 💌
+        </p>
       </div>
     `;
 
-    for (let i = 0; i < 40; i++) {
-      createHeart();
+    playSong();
+    startTyping();
+    for (let i = 0; i < 45; i++) createHeart();
+  }
+
+  function startTyping() {
+    const text = "I LOVE YOU SO MUCH 💕\nYou’re my world, my happiness,\nmy favorite person, always.";
+    const typingEl = document.getElementById("typing");
+    let index = 0;
+
+    function type() {
+      if (index < text.length) {
+        typingEl.innerHTML += text.charAt(index) === "\n" ? "<br>" : text.charAt(index);
+        index++;
+        setTimeout(type, 60);
+      }
     }
+    type();
+  }
+
+  function playSong() {
+    const song = document.getElementById("song");
+    song.play();
   }
 
   function createHeart() {
@@ -153,7 +192,6 @@
     heart.style.bottom = "0px";
     heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
     document.body.appendChild(heart);
-
     setTimeout(() => heart.remove(), 5000);
   }
 </script>
