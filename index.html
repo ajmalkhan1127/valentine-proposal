@@ -1,136 +1,162 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Falak, Will You Be My Valentine? ❤️</title>
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: linear-gradient(135deg, #ff5f9e, #ff8fb1);
-      font-family: 'Segoe UI', sans-serif;
-      color: #fff;
-      overflow: hidden;
-    }
+<meta charset="UTF-8">
+<title>Falak ❤️ Will You Be My Valentine?</title>
 
-    .container {
-      text-align: center;
-      background: rgba(255, 255, 255, 0.18);
-      padding: 45px;
-      border-radius: 22px;
-      backdrop-filter: blur(12px);
-      box-shadow: 0 12px 35px rgba(0,0,0,0.25);
-    }
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    background: radial-gradient(circle at top, #ff9a9e, #fad0c4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', sans-serif;
+    overflow: hidden;
+  }
 
-    h1 {
-      font-size: 2.6rem;
-      margin-bottom: 10px;
-    }
+  .card {
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(12px);
+    padding: 45px;
+    border-radius: 25px;
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+    max-width: 400px;
+  }
 
-    h2 {
-      margin-top: 15px;
-      font-size: 1.8rem;
-    }
+  h1 {
+    font-size: 2.5rem;
+    color: #fff;
+    margin-bottom: 10px;
+  }
 
-    p {
-      font-size: 1.2rem;
-      margin-bottom: 25px;
-    }
+  h2 {
+    font-size: 1.6rem;
+    color: #fff;
+    margin-bottom: 20px;
+  }
 
-    button {
-      padding: 12px 32px;
-      font-size: 1.1rem;
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-      margin: 10px;
-      transition: 0.3s;
-    }
+  p {
+    color: #fff;
+    font-size: 1.1rem;
+    margin-bottom: 25px;
+  }
 
-    #yes {
-      background: #fff;
-      color: #ff4d6d;
-      font-weight: bold;
-    }
+  .buttons {
+    position: relative;
+    height: 80px;
+  }
 
-    #yes:hover {
-      transform: scale(1.12);
-    }
+  button {
+    padding: 12px 32px;
+    font-size: 1.1rem;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s ease;
+  }
 
-    #no {
-      background: transparent;
-      color: #fff;
-      border: 2px solid #fff;
-      position: absolute;
-    }
+  #yes {
+    background: white;
+    color: #ff4d6d;
+    font-weight: bold;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  }
 
-    .heart {
-      position: absolute;
-      font-size: 22px;
-      animation: float 4s linear infinite;
-    }
+  #yes:hover {
+    transform: scale(1.15);
+  }
 
-    @keyframes float {
-      0% { transform: translateY(0); opacity: 1; }
-      100% { transform: translateY(-100vh); opacity: 0; }
-    }
-  </style>
+  #no {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+    position: absolute;
+    right: 0;
+  }
+
+  .heart {
+    position: absolute;
+    font-size: 22px;
+    animation: floatUp 4s linear infinite;
+  }
+
+  @keyframes floatUp {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-100vh); opacity: 0; }
+  }
+</style>
 </head>
+
 <body>
 
-  <div class="container">
-    <h1>Hey Falak ❤️</h1>
-    <p>I’ve been wanting to ask you something special…</p>
-    <h2>Will you be my Valentine? 💌</h2>
+<div class="card">
+  <h1>Hey Falak ❤️</h1>
+  <p>
+    From random smiles to silent care,  
+    you’ve become someone really special to me…
+  </p>
+  <h2>Will you be my Valentine? 💌</h2>
 
+  <div class="buttons">
     <button id="yes" onclick="yesClicked()">Yes 💖</button>
-    <button id="no" onmouseover="moveNo()">No 🙃</button>
+    <button id="no">No 🙃</button>
   </div>
+</div>
 
-  <script>
-    function yesClicked() {
-      document.body.innerHTML = `
-        <div style="
-          display:flex;
-          flex-direction:column;
-          justify-content:center;
-          align-items:center;
-          height:100vh;
-          background:linear-gradient(135deg,#ff5f9e,#ff8fb1);
-          color:white;
-          font-family:'Segoe UI',sans-serif;
-          text-align:center;">
-          <h1>Falak 💕</h1>
-          <h2>You just made my heart so happy 🥰</h2>
-          <p style="font-size:1.4rem;">Happy Valentine’s Day ❤️</p>
-        </div>
-      `;
-      for (let i = 0; i < 40; i++) createHeart();
+<script>
+  const noBtn = document.getElementById("no");
+
+  // Move NO button on hover
+  noBtn.addEventListener("mouseover", moveNo);
+  noBtn.addEventListener("click", moveNo);
+
+  function moveNo() {
+    const x = Math.random() * (window.innerWidth - 150);
+    const y = Math.random() * (window.innerHeight - 80);
+    noBtn.style.position = "fixed";
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+  }
+
+  function yesClicked() {
+    document.body.innerHTML = `
+      <div style="
+        height:100vh;
+        background: radial-gradient(circle at top,#ff9a9e,#fad0c4);
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+        font-family:'Segoe UI',sans-serif;
+        text-align:center;
+        color:white;">
+        <h1>Falak 💕</h1>
+        <h2>You just made my heart skip a beat 🥹</h2>
+        <p style="font-size:1.4rem;">Happy Valentine’s Day ❤️</p>
+        <p>— Yours, Ajmal</p>
+      </div>
+    `;
+
+    for (let i = 0; i < 40; i++) {
+      createHeart();
     }
+  }
 
-    function moveNo() {
-      const noBtn = document.getElementById("no");
-      const x = Math.random() * (window.innerWidth - 120);
-      const y = Math.random() * (window.innerHeight - 60);
-      noBtn.style.left = x + "px";
-      noBtn.style.top = y + "px";
-    }
+  function createHeart() {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * window.innerWidth + "px";
+    heart.style.bottom = "0px";
+    heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
+    document.body.appendChild(heart);
 
-    function createHeart() {
-      const heart = document.createElement("div");
-      heart.className = "heart";
-      heart.innerHTML = "❤️";
-      heart.style.left = Math.random() * window.innerWidth + "px";
-      heart.style.bottom = "0px";
-      heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
-      document.body.appendChild(heart);
-
-      setTimeout(() => heart.remove(), 5000);
-    }
-  </script>
+    setTimeout(() => heart.remove(), 5000);
+  }
+</script>
 
 </body>
 </html>
