@@ -1,102 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Valentine Proposal</title>
+<meta charset="UTF-8">
+<title>Valentine Proposal</title>
 
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: linear-gradient(135deg, #ff4d6d, #ff758f);
-      font-family: 'Segoe UI', sans-serif;
-      color: white;
-      text-align: center;
-      overflow: hidden;
-    }
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #ff4d6d, #ff758f);
+    font-family: 'Segoe UI', sans-serif;
+    color: white;
+    text-align: center;
+    overflow: hidden;
+  }
 
-    h1 {
-      font-size: 40px;
-      margin-bottom: 20px;
-    }
+  h1 {
+    font-size: 40px;
+    margin-bottom: 20px;
+  }
 
-    #message {
-      font-size: 24px;
-      min-height: 70px;
-      margin-bottom: 30px;
-    }
+  #message {
+    font-size: 24px;
+    min-height: 70px;
+    margin-bottom: 30px;
+  }
 
-    button {
-      padding: 12px 30px;
-      font-size: 18px;
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-      margin: 10px;
-    }
+  button {
+    padding: 12px 30px;
+    font-size: 18px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    margin: 10px;
+  }
 
-    #yes {
-      background: white;
-      color: #ff4d6d;
-    }
+  #yes {
+    background: white;
+    color: #ff4d6d;
+  }
 
-    #no {
-      background: transparent;
-      color: white;
-      border: 2px solid white;
-      position: absolute;
+  #no {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+    position: absolute;
+  }
+
+  /* HEARTS ANIMATION */
+  .heart {
+    position: fixed;
+    bottom: -20px;
+    font-size: 24px;
+    color: rgba(255, 255, 255, 0.9);
+    animation: floatUp 6s linear forwards;
+    pointer-events: none;
+  }
+
+  @keyframes floatUp {
+    0% {
+      transform: translateY(0) scale(1);
+      opacity: 1;
     }
-  </style>
+    100% {
+      transform: translateY(-110vh) scale(1.5);
+      opacity: 0;
+    }
+  }
+</style>
 </head>
 
 <body>
 
-  <div>
-    <h1>Will you be my Valentine? ❤️</h1>
-    <div id="message"></div>
-    <button id="yes">YES ❤️</button>
-    <button id="no">NO</button>
-  </div>
+<div>
+  <h1>Will you be my Valentine? ❤️</h1>
+  <div id="message"></div>
+  <button id="yes">YES ❤️</button>
+  <button id="no">NO</button>
+</div>
 
-  <!-- MUSIC -->
-  <audio id="music">
-    <source src="romantic.mp3" type="audio/mpeg">
-  </audio>
+<!-- MUSIC -->
+<audio id="music">
+  <source src="romantic.mp3" type="audio/mpeg">
+</audio>
 
-  <script>
-    const noBtn = document.getElementById("no");
-    const yesBtn = document.getElementById("yes");
-    const msg = document.getElementById("message");
-    const music = document.getElementById("music");
+<script>
+  const noBtn = document.getElementById("no");
+  const yesBtn = document.getElementById("yes");
+  const msg = document.getElementById("message");
+  const music = document.getElementById("music");
 
-    // NO BUTTON HOVER (MOVES, NOT DISAPPEARS)
-    noBtn.addEventListener("mouseover", () => {
-      const x = Math.random() * (window.innerWidth - 100);
-      const y = Math.random() * (window.innerHeight - 50);
-      noBtn.style.left = x + "px";
-      noBtn.style.top = y + "px";
-    });
+  // NO BUTTON HOVER (moves but never disappears)
+  noBtn.addEventListener("mouseover", () => {
+    const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - 20);
+    const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - 20);
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+  });
 
-    // TYPING MESSAGE
-    function typeText(text) {
-      let i = 0;
-      msg.innerHTML = "";
-      const interval = setInterval(() => {
-        msg.innerHTML += text.charAt(i);
-        i++;
-        if (i === text.length) clearInterval(interval);
-      }, 50);
-    }
+  // TYPING MESSAGE FUNCTION
+  function typeText(text) {
+    let i = 0;
+    msg.innerHTML = "";
+    const interval = setInterval(() => {
+      msg.innerHTML += text.charAt(i);
+      i++;
+      if (i === text.length) clearInterval(interval);
+    }, 50);
+  }
 
-    // YES CLICK
-    yesBtn.addEventListener("click", () => {
-      typeText("Happy Valentine Day my pretty Falak ❤️ I love you alot ❤️ you are world to me ❤️");
-      music.play();
-    });
-  </script>
+  // YES BUTTON CLICK
+  yesBtn.addEventListener("click", () => {
+    typeText("HAPPY VALENTINE DAY MY PRETTY FALAK ❤️ I LOVE YOU ALOT ❤️ YOU ARE WORLD TO ME ❤️");
+    music.play();
+  });
+
+  // CREATE FLOATING HEARTS
+  function createHeart() {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * window.innerWidth + "px";
+    heart.style.animationDuration = (4 + Math.random() * 3) + "s";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 7000);
+  }
+
+  // HEARTS POPPING CONTINUOUSLY
+  setInterval(createHeart, 400);
+</script>
 
 </body>
 </html>
